@@ -1,13 +1,14 @@
 const fs = require('fs')
 
 const getNotes = function () {
-    return 'Your notes...';
+    return 'Your notes...'
 }
 
 // List function for service
+// 1.Add note
 const addNote = function(title, body) {
     const notes = loadNotes()
-    const isDuplicateNotes = notes.some(note => note.title === title);
+    const isDuplicateNotes = notes.some(note => note.title === title)
     if (!isDuplicateNotes) {
         notes.push({
             title: title,
@@ -16,7 +17,22 @@ const addNote = function(title, body) {
         saveNotes(notes)
         console.log('New note is added');
     } else {
-        console.log('Note title is existed!');
+        console.log('Note title is existed!')
+    }
+}
+
+// 2.Remove note
+const removeNote = function(title) {
+    const notes = loadNotes()
+    const isExist = notes.some(note => note.title === title)
+    if (isExist) {
+        const findingNote = (note) => note.title === title
+        const indexOfNote = notes.findIndex(findingNote)
+        notes.splice(indexOfNote, 1)
+        saveNotes(notes)
+        console.log('Note is removed successfully!');
+    } else {
+        console.log('Note does not exist!');
     }
 }
 
@@ -39,5 +55,6 @@ const loadNotes = function () {
 
 module.exports = {
     getNotes: getNotes,
-    addNote: addNote
+    addNote: addNote,
+    removeNote: removeNote
 }

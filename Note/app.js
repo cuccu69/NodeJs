@@ -36,15 +36,10 @@ yargs.command({
             describe: 'Note title',
             demandOption: true,
             type: 'string'
-        },
-        body: {
-            describe: 'Note body',
-            demandOption: true,
-            type: 'string'
         }
     },
     handler: function (argv) {
-        console.log('Removing the note')
+        notes.removeNote(argv.title)
     }
 })
 
