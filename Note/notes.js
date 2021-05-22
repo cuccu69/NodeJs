@@ -7,9 +7,8 @@ const getNotes = () => {
 // List function for service
 // 1.Add note
 const addNote = (title, body) => {
-    const notes = loadNotes()
-    const isDuplicateNotes = notes.some(note => note.title === title)
-    if (!isDuplicateNotes) {
+    const note = findByTitle(title)
+    if (!note) {
         notes.push({
             title: title,
             body: body
@@ -24,8 +23,8 @@ const addNote = (title, body) => {
 // 2.Remove note
 const removeNote = (title) => {
     const notes = loadNotes()
-    const isExist = notes.some(note => note.title === title)
-    if (isExist) {
+    const note = findByTitle(title)
+    if (note) {
         const indexOfNote = notes.findIndex(note => note.title === title)
         notes.splice(indexOfNote, 1)
         saveNotes(notes)
@@ -35,12 +34,30 @@ const removeNote = (title) => {
     }
 }
 
-// 3.List note
+// 3.List notes
 const listNote = () => {
-    console.log('List notes:');
-    loadNotes().forEach(note => console.log(note));
+    console.log(chalk.bgGreen('List notes:'))
+    loadNotes().forEach(note => console.log(`${note.title}: ${note.body}`))
 }
 
+// 4.Edit a note
+const editNote = (title, body) => {
+    const notes = loadNotes();
+    const note = findByTitle(title)
+    if (note) {
+        note.body = body
+        notes.splice(notes.findIndex(note => note.title === title), 1)
+        notes.push(note)
+        saveNotes(notes)
+        console.log(chalk.bgGreen('Edit success!'));
+    } else{
+        return console.log(chalk.bgRed('Note title not exist!'));
+    }
+}
+
+const findByTitle = (title) => {
+    return loadNotes().find(note => note.title === title)
+}
 // Bien object thanh kieu JSON va luu vao file luu tru, neu chua co no se tu tao
 const saveNotes = (notes) => {
     const dataJSON = JSON.stringify(notes)
@@ -62,5 +79,6 @@ module.exports = {
     getNotes: getNotes,
     addNote: addNote,
     removeNote: removeNote,
-    listNote: listNote
+    listNote: listNote,
+    editNote: editNote
 }
