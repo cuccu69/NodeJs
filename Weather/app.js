@@ -2,7 +2,7 @@ const request = require('postman-request')
 const geocode = require('./utils/geocode')
 const forecast = require('./utils/forecast')
 
-geocode('Hà Nội', (error, data) => {
+geocode('New York', (error, data) => {
     if (error) {
         return console.log(error);
     }
@@ -12,7 +12,6 @@ geocode('Hà Nội', (error, data) => {
         if (error) {
             console.log(error);
         }
-
         console.log(data.location);
         console.log(forecastData);
     })
