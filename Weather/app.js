@@ -10,8 +10,6 @@ if (!addres) {
         if (error) {
             return console.log(error);
         }
-        // console.log('Error', error)
-        // console.log('Data', data)
         forecast(latitude, longtitude, (error, forecastData) => {
             if (error) {
                 console.log(error);

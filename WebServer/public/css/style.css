@@ -1,0 +1,28 @@
+body {
+    max-width: 1200px;
+    border: solid 1px;
+    margin: auto;
+}
+
+h1 {
+    color: gray;
+    margin: 10px 0px;
+    /* font-size: larger; */
+}
+
+a {
+    text-decoration: none;
+    padding: 10px 0px;
+    margin: 5px 5px 5px 0px;
+    display: inline-flex;
+    width: 50px;
+    align-items: center;
+    justify-content: center;
+    /* border: solid 1px gray; */
+
+}
+
+a:hover {
+    background-color: green;
+    transition: linear 1s;
+}
